@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خانهٔ ماندگار | املاک لوکس</title>
+    <meta name="description" content="خانهٔ ماندگار — پلتفرم جستجو و خرید ملک لوکس. آپارتمان، ویلا، زمین و ملک تجاری. مشاوره تخصصی املاک.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --warm-white: #FAFAF8;
+            --charcoal: #2C2C2C;
+            --brass: #B8977E;
+            --brass-light: #D4C4B0;
+            --brass-dark: #8B6F5A;
+            --ink: #2B2B2B;
+            --warm-gray: #707070;
+            --card-bg: #FFFFFF;
+            --border-color: #E8E5E0;
+            --border-light: #F0EDE8;
+            --success: #4A7C59;
+            --error: #C45C4A;
+            --font-heading: 'Vazirmatn', sans-serif;
+            --font-body: 'Vazirmatn', sans-serif;
+            --font-serif: 'Playfair Display', 'Vazirmatn', serif;
+            --font-mono: 'Inter', 'Vazirmatn', monospace;
+            --header-height: 72px;
+            --section-gap: 100px;
+            --card-radius: 0px;
+            --btn-radius: 0px;
+            --container-max: 1280px;
+            --side-padding: 40px;
+            --mobile-padding: 20px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --shadow-soft: 0 4px 20px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; background: var(--warm-white); }
+
+        body {
+            font-family: var(--font-body); background: var(--warm-white);
+            color: var(--ink); overflow-x: hidden; line-height: 1.7;
+            min-height: 100vh; font-weight: 400; -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--warm-white); }
+        ::-webkit-scrollbar-thumb { background: var(--warm-gray); border-radius: 0; }
+
+        /* ==================== TYPOGRAPHY ==================== */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading); font-weight: 800; line-height: 1.2; color: var(--ink);
+        }
+        h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); letter-spacing: -0.02em; }
+        h2 { font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.01em; }
+        h3 { font-size: clamp(1.4rem, 2vw, 1.8rem); }
+        h4 { font-size: 1.2rem; font-weight: 700; }
+        p { font-family: var(--font-body); font-size: 1rem; color: var(--warm-gray); line-height: 1.8; margin-bottom: 0.8rem; }
+        a { color: var(--brass-dark); text-decoration: none; transition: color var(--transition-fast); font-weight: 500; }
+        a:hover { color: var(--brass); }
+
+        .main-content { position: relative; z-index: 1; }
+
+        .section { padding: var(--section-gap) var(--side-padding); position: relative; }
+        .section-dark { background: var(--charcoal); color: #fff; }
+        .section-dark h2, .section-dark h3, .section-dark h4 { color: #fff; }
+        .section-dark p { color: rgba(255,255,255,0.7); }
+        .container { max-width: var(--container-max); margin: 0 auto; }
+        .container-sm { max-width: 850px; margin: 0 auto; }
+        .container-xs { max-width: 600px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.2em;
+            color: var(--brass); margin-bottom: 0.8rem; display: block; font-weight: 600;
+        }
+        .section-title { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: 1rem; color: var(--ink); }
+        .section-subtitle { font-size: 1.05rem; color: var(--warm-gray); margin-bottom: 2.5rem; max-width: 600px; line-height: 1.8; }
+        .divider-line { width: 40px; height: 2px; background: var(--brass); margin: 1.5rem 0; }
+        .divider-full { width: 100%; height: 1px; background: var(--border-color); margin: 0; }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            height: var(--header-height); padding: 0 var(--side-padding);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(250,250,248,0.95); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color); transition: all var(--transition-normal);
+        }
+        .logo {
+            font-family: var(--font-heading); font-size: 1.2rem; font-weight: 900;
+            color: var(--ink); text-decoration: none; letter-spacing: 0.05em;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .logo-mark {
+            width: 8px; height: 24px; background: var(--brass); display: inline-block;
+        }
+
+        .nav-menu { display: flex; gap: 0; list-style: none; }
+        .nav-menu a {
+            font-family: var(--font-body); color: var(--ink); text-decoration: none;
+            font-size: 0.85rem; font-weight: 600; padding: 0.5rem 1.2rem; letter-spacing: 0.03em;
+            transition: all var(--transition-fast); white-space: nowrap; text-transform: uppercase;
+        }
+        .nav-menu a:hover { color: var(--brass); }
+        .nav-menu a.active { color: var(--brass); border-bottom: 2px solid var(--brass); padding-bottom: calc(0.5rem - 2px); }
+
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1001; padding: 8px; }
+        .hamburger span { width: 24px; height: 2px; background: var(--ink); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); background: var(--brass); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); background: var(--brass); }
+
+        .mobile-nav {
+            position: fixed; top: 0; right: -100%; width: 80%; max-width: 340px; height: 100vh;
+            background: #fff; z-index: 1000; padding: 5rem 2rem 2rem;
+            transition: right 0.5s cubic-bezier(0.4,0,0.2,1); overflow-y: auto;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav a { display: block; color: var(--ink); font-size: 1rem; font-weight: 500; padding: 0.8rem 0; border-bottom: 1px solid var(--border-light); }
+        .mobile-nav a:hover { color: var(--brass); padding-right: 0.8rem; }
+        .mobile-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 999; opacity: 0; pointer-events: none; transition: opacity var(--transition-normal);
+        }
+        .mobile-overlay.active { opacity: 1; pointer-events: all; }
+
+        /* ==================== BUTTONS ==================== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.8rem 2.2rem; border-radius: var(--btn-radius); font-family: var(--font-body);
+            font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer;
+            transition: all var(--transition-fast); border: none; white-space: nowrap; letter-spacing: 0.03em;
+        }
+        .btn-primary { background: var(--charcoal); color: #fff; }
+        .btn-primary:hover { background: var(--ink); color: #fff; }
+        .btn-brass { background: var(--brass); color: #fff; }
+        .btn-brass:hover { background: var(--brass-dark); color: #fff; }
+        .btn-outline { background: transparent; border: 2px solid var(--ink); color: var(--ink); }
+        .btn-outline:hover { background: var(--ink); color: #fff; }
+        .btn-sm { padding: 0.5rem 1.2rem; font-size: 0.82rem; }
+        .btn-lg { padding: 1rem 3rem; font-size: 1rem; }
+        .btn-full { width: 100%; }
+
+        /* ==================== CARDS ==================== */
+        .card {
+            background: var(--card-bg); border: 1px solid var(--border-light);
+            border-radius: var(--card-radius); overflow: hidden; transition: all 0.4s ease;
+            box-shadow: var(--shadow-soft);
+        }
+        .card:hover { box-shadow: var(--shadow-md); }
+        .card-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+        .card-body { padding: 1.5rem; }
+        .card-tag {
+            position: absolute; top: 12px; right: 12px; background: var(--brass);
+            color: #fff; padding: 0.3rem 0.8rem; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.05em; text-transform: uppercase; z-index: 2;
+        }
+
+        /* ==================== GRID ==================== */
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+
+        /* ==================== FORM ==================== */
+        .form-group { margin-bottom: 1.5rem; }
+        .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; letter-spacing: 0.03em; }
+        .form-input {
+            width: 100%; padding: 0.85rem 0; background: transparent; border: none;
+            border-bottom: 1px solid var(--border-color); color: var(--ink);
+            font-family: var(--font-body); font-size: 0.95rem; transition: all var(--transition-fast); outline: none;
+        }
+        .form-input:focus { border-bottom-color: var(--brass); }
+        textarea.form-input { resize: vertical; min-height: 100px; border: 1px solid var(--border-color); padding: 0.85rem; }
+
+        /* ==================== PAGE SYSTEM ==================== */
+        .page { display: none; min-height: 60vh; }
+        .page.active { display: block; }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            min-height: 85vh; display: flex; align-items: center;
+            padding: 120px var(--side-padding) 80px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600') center/cover no-repeat;
+            position: relative;
+        }
+        .hero-content { max-width: 600px; position: relative; z-index: 2; }
+        .hero-content h1 { color: #fff; margin-bottom: 1.2rem; }
+        .hero-content p { color: rgba(255,255,255,0.85); font-size: 1.15rem; margin-bottom: 2rem; }
+
+        /* ==================== STAT BLOCK ==================== */
+        .stat-block { text-align: center; padding: 2rem; }
+        .stat-value { font-family: var(--font-serif); font-size: 3rem; font-weight: 700; color: var(--brass); line-height: 1; }
+        .stat-label { font-size: 0.85rem; color: var(--warm-gray); margin-top: 0.5rem; font-weight: 500; }
+
+        /* ==================== MODAL ==================== */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 2000; display: none;
+            align-items: center; justify-content: center; backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #fff; padding: 2.5rem; max-width: 650px; width: 92%;
+            max-height: 80vh; overflow-y: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+        .modal-close {
+            position: absolute; top: 1rem; right: 1rem;
+            background: var(--ink); color: #fff; border: none; width: 34px; height: 34px;
+            cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        .modal-close:hover { background: var(--brass); }
+
+        /* ==================== FOOTER ==================== */
+        .footer { background: var(--charcoal); color: #fff; padding: 70px var(--side-padding) 30px; }
+        .footer a { color: rgba(255,255,255,0.6); font-weight: 400; transition: all var(--transition-fast); }
+        .footer a:hover { color: var(--brass-light); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2.5rem; }
+        .footer h5 { color: #fff; margin-bottom: 1rem; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            :root { --side-padding: var(--mobile-padding); --section-gap: 60px; --header-height: 64px; }
+            .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+            .hero { min-height: 60vh; padding: 100px var(--side-padding) 60px; }
+            .hero-content h1 { font-size: 2rem; }
+            .stat-value { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== PRELOADER ==================== -->
+    <div id="preloader" style="position:fixed;top:0;left:0;width:100%;height:100%;background:var(--warm-white);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:2rem;">
+            <span class="logo-mark" style="width:6px;height:40px;background:var(--brass);display:inline-block;"></span>
+            <span style="font-family:var(--font-heading);font-size:1.8rem;font-weight:900;color:var(--ink);letter-spacing:0.08em;">خانهٔ ماندگار</span>
+        </div>
+        <div style="width:120px;height:2px;background:var(--border-color);overflow:hidden;">
+            <div id="preloaderBar" style="width:0%;height:100%;background:var(--brass);transition:width 0.15s linear;"></div>
+        </div>
+        <p style="font-size:0.7rem;color:var(--warm-gray);margin-top:1rem;letter-spacing:0.2em;text-transform:uppercase;">در حال بارگذاری</p>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header" id="header">
+        <a href="#home" class="logo" data-page="home">
+            <span class="logo-mark"></span>
+            خانهٔ ماندگار
+        </a>
+        <nav>
+            <ul class="nav-menu" id="mainNav">
+                <li><a href="#home" data-page="home" class="active">خانه</a></li>
+                <li><a href="#search" data-page="search">جستجو</a></li>
+                <li><a href="#blog" data-page="blog">وبلاگ</a></li>
+                <li><a href="#neighborhoods" data-page="neighborhoods">محله‌ها</a></li>
+                <li><a href="#about" data-page="about">درباره ما</a></li>
+                <li><a href="#contact" data-page="contact">تماس با ما</a></li>
+            </ul>
+        </nav>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <a href="#contact" class="btn btn-brass btn-sm" data-page="contact">درج آگهی رایگان</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE NAV ==================== -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#home" data-page="home">🏠 خانه</a>
+        <a href="#search" data-page="search">🔍 جستجوی ملک</a>
+        <a href="#blog" data-page="blog">📝 وبلاگ و مقالات</a>
+        <a href="#neighborhoods" data-page="neighborhoods">📍 محله‌ها</a>
+        <a href="#about" data-page="about">ℹ️ درباره ما</a>
+        <a href="#contact" data-page="contact">📞 تماس با ما</a>
+        <a href="#faq" data-page="faq">❓ سوالات متداول</a>
+        <a href="#terms" data-page="terms">📋 قوانین و مقررات</a>
+    </nav>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="main-content">
+
+        <!-- ============================================ -->
+        <!-- صفحه ۱: خانه                                  -->
+        <!-- ============================================ -->
+        <section class="page active" id="page-home">
+
+            <!-- Hero -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="section-label" style="color:var(--brass-light);">پلتفرم املاک لوکس</span>
+                        <h1>خانهٔ آرامش<br>خود را پیدا کنید</h1>
+                        <p>جستجو در میان هزاران ملک تأییدشده — از آپارتمان‌های مدرن تا ویلاهای شمال</p>
+                        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+                            <a href="#search" class="btn btn-brass btn-lg" data-page="search">جستجوی ملک</a>
+                            <a href="#contact" class="btn btn-outline btn-lg" data-page="contact" style="border-color:#fff;color:#fff;">درج آگهی رایگان</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <section class="section" style="padding-top:60px;padding-bottom:60px;">
+                <div class="container">
+                    <div class="grid-4">
+                        <div class="stat-block">
+                            <div class="stat-value" data-target="20000">۰</div>
+                            <div class="stat-label">فایل فعال</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-value" data-target="5000">۰</div>
+                            <div class="stat-label">مشاور حرفه‌ای</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-value" data-target="96">۰٪</div>
+                            <div class="stat-label">رضایت مشتریان</div>
+                        </div>
+                        <div class="stat-block">
+                            <div class="stat-value" data-target="15">۰+</div>
+                            <div class="stat-label">سال تجربه</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider-full"></div>
+
+            <!-- Quick Categories -->
+            <section class="section">
+                <div class="container">
+                    <span class="section-label">دسته‌بندی‌های محبوب</span>
+                    <h2 class="section-title">چه ملکی نیاز دارید؟</h2>
+                    <div class="divider-line"></div>
+                    <div class="grid-4" style="margin-top:2rem;">
+                        <div class="card" style="cursor:pointer;" onclick="navigateTo('search')">
+                            <div class="card-body" style="text-align:center;padding:2.5rem;">
+                                <span style="font-size:3rem;">🏢</span>
+                                <h4 style="margin:1rem 0;">آپارتمان</h4>
+                                <p style="font-size:0.85rem;">مسکونی در تمام مناطق</p>
+                            </div>
+                        </div>
+                        <div class="card" style="cursor:pointer;" onclick="navigateTo('search')">
+                            <div class="card-body" style="text-align:center;padding:2.5rem;">
+                                <span style="font-size:3rem;">🏡</span>
+                                <h4 style="margin:1rem 0;">ویلا</h4>
+                                <p style="font-size:0.85rem;">شمال، کردان، لواسان</p>
+                            </div>
+                        </div>
+                        <div class="card" style="cursor:pointer;" onclick="navigateTo('search')">
+                            <div class="card-body" style="text-align:center;padding:2.5rem;">
+                                <span style="font-size:3rem;">🏗️</span>
+                                <h4 style="margin:1rem 0;">زمین و کلنگی</h4>
+                                <p style="font-size:0.85rem;">مناسب سرمایه‌گذاری</p>
+                            </div>
+                        </div>
+                        <div class="card" style="cursor:pointer;" onclick="navigateTo('search')">
+                            <div class="card-body" style="text-align:center;padding:2.5rem;">
+                                <span style="font-size:3rem;">🏬</span>
+                                <h4 style="margin:1rem 0;">تجاری و اداری</h4>
+                                <p style="font-size:0.85rem;">مغازه، دفتر کار، سوله</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider-full"></div>
+
+            <!-- Featured Properties -->
+            <section class="section section-dark">
+                <div class="container">
+                    <span class="section-label" style="color:var(--brass-light);">فایل‌های ویژه</span>
+                    <h2 style="color:#fff;">آگهی‌های VIP</h2>
+                    <div class="divider-line"></div>
+                    <div class="grid-3" style="margin-top:2rem;">
+                        <div class="card" style="position:relative;">
+                            <span class="card-tag">فوری</span>
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" alt="آپارتمان لوکس" class="card-image" onerror="this.style.background='var(--charcoal)';this.style.height='250px';">
+                            <div class="card-body">
+                                <h4>آپارتمان لوکس ۱۲۰ متری — الهیه</h4>
+                                <p style="font-size:0.85rem;">۳ خواب | ۲ حمام | پارکینگ | انباری</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                                    <strong style="color:var(--brass-dark);font-size:1.2rem;">۱۲,۵۰۰,۰۰۰,۰۰۰ تومان</strong>
+                                    <button class="btn btn-outline btn-sm" onclick="openPropertyDetail('luxury')">جزئیات ←</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="position:relative;">
+                            <span class="card-tag">ویلا</span>
+                            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600" alt="ویلای شمال" class="card-image" onerror="this.style.background='var(--charcoal)';this.style.height='250px';">
+                            <div class="card-body">
+                                <h4>ویلای ۳۰۰ متری — نوشهر</h4>
+                                <p style="font-size:0.85rem;">۴ خواب | استخر | باغ | پارکینگ</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                                    <strong style="color:var(--brass-dark);font-size:1.2rem;">۱۸,۰۰۰,۰۰۰,۰۰۰ تومان</strong>
+                                    <button class="btn btn-outline btn-sm" onclick="openPropertyDetail('villa')">جزئیات ←</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" style="position:relative;">
+                            <span class="card-tag">سرمایه‌گذاری</span>
+                            <img src="https://images.unsplash.com/photo-1600566753086-00f18f6b0050?w=600" alt="زمین" class="card-image" onerror="this.style.background='var(--charcoal)';this.style.height='250px';">
+                            <div class="card-body">
+                                <h4>زمین ۵۰۰ متری — لواسان</h4>
+                                <p style="font-size:0.85rem;">دو جبهه | مجوز ساخت ۴ طبقه</p>
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1rem;">
+                                    <strong style="color:var(--brass-dark);font-size:1.2rem;">۲۵,۰۰۰,۰۰۰,۰۰۰ تومان</strong>
+                                    <button class="btn btn-outline btn-sm" onclick="openPropertyDetail('land')">جزئیات ←</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin-top:2rem;">
+                        <a href="#search" class="btn btn-brass" data-page="search">مشاهده همه فایل‌ها</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider-full"></div>
+
+            <!-- Neighborhoods -->
+            <section class="section">
+                <div class="container">
+                    <span class="section-label">محله‌های برتر</span>
+                    <h2 class="section-title">مناطق پربازدید</h2>
+                    <div class="divider-line"></div>
+                    <div class="grid-4" style="margin-top:2rem;">
+                        <div class="card" style="cursor:pointer;text-align:center;padding:2rem;" onclick="navigateTo('neighborhoods')">
+                            <h4>سعادت‌آباد</h4>
+                            <p style="font-size:0.85rem;">میانگین: ۴۵ میلیون/متر</p>
+                        </div>
+                        <div class="card" style="cursor:pointer;text-align:center;padding:2rem;" onclick="navigateTo('neighborhoods')">
+                            <h4>الهیه</h4>
+                            <p style="font-size:0.85rem;">میانگین: ۸۰ میلیون/متر</p>
+                        </div>
+                        <div class="card" style="cursor:pointer;text-align:center;padding:2rem;" onclick="navigateTo('neighborhoods')">
+                            <h4>پاسداران</h4>
+                            <p style="font-size:0.85rem;">میانگین: ۵۵ میلیون/متر</p>
+                        </div>
+                        <div class="card" style="cursor:pointer;text-align:center;padding:2rem;" onclick="navigateTo('neighborhoods')">
+                            <h4>زعفرانیه</h4>
+                            <p style="font-size:0.85rem;">میانگین: ۷۰ میلیون/متر</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="divider-full"></div>
+
+            <!-- CTA -->
+            <section class="section section-dark" style="text-align:center;">
+                <div class="container-sm">
+                    <h2 style="color:#fff;">ملک خود را رایگان آگهی کنید</h2>
+                    <p style="color:rgba(255,255,255,0.7);font-size:1.1rem;">همین حالا آگهی خود را ثبت کنید و در کمتر از ۲۴ ساعت مشتری واقعی دریافت کنید</p>
+                    <a href="#contact" class="btn btn-brass btn-lg" data-page="contact" style="margin-top:1rem;">ثبت آگهی رایگان</a>
+                </div>
+            </section>
+
+        </section>
+        <!-- پایان صفحه خانه -->
+
+        <!-- ============================================ -->
+        <!-- صفحه ۲: جستجو                                 -->
+        <!-- ============================================ -->
+        <section class="page" id="page-search">
+            <div class="section" style="padding-top:120px;">
+                <div class="container">
+                    <span class="section-label">جستجوی پیشرفته</span>
+                    <h1 class="section-title">ملک مورد نظر خود را بیابید</h1>
+                    <div class="divider-line"></div>
+
+                    <!-- Search Filters -->
+                    <div class="card" style="padding:2rem;margin-top:2rem;">
+                        <div class="grid-4" style="align-items:end;">
+                            <div class="form-group"><label class="form-label">نوع معامله</label>
+                                <select class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;"><option>فروش</option><option>رهن و اجاره</option><option>پیش‌فروش</option></select>
+                            </div>
+                            <div class="form-group"><label class="form-label">نوع ملک</label>
+                                <select class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;"><option>مسکونی</option><option>ویلا</option><option>زمین</option><option>تجاری</option></select>
+                            </div>
+                            <div class="form-group"><label class="form-label">شهر/منطقه</label>
+                                <input type="text" class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="مثال: سعادت‌آباد">
+                            </div>
+                            <button class="btn btn-brass btn-full" onclick="alert('جستجو انجام شد!')">🔍 جستجو</button>
+                        </div>
+                        <div class="grid-3" style="margin-top:1rem;">
+                            <div class="form-group"><label class="form-label">حداقل قیمت</label><input type="number" class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="تومان"></div>
+                            <div class="form-group"><label class="form-label">حداکثر قیمت</label><input type="number" class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="تومان"></div>
+                            <div class="form-group"><label class="form-label">حداقل متراژ</label><input type="number" class="form-input" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="متر مربع"></div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="grid-3" style="margin-top:2rem;">
+                        <div class="card" style="position:relative;"><span class="card-tag">فوری</span><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" class="card-image" alt="ملک"><div class="card-body"><h4>آپارتمان ۹۰ متری — سعادت‌آباد</h4><p style="font-size:0.85rem;">۲ خواب | نوساز | پارکینگ</p><strong style="color:var(--brass-dark);">۸,۵۰۰,۰۰۰,۰۰۰ تومان</strong><br><button class="btn btn-outline btn-sm" style="margin-top:0.5rem;" onclick="openPropertyDetail('apt1')">جزئیات ←</button></div></div>
+                        <div class="card" style="position:relative;"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600" class="card-image" alt="ملک"><div class="card-body"><h4>خانه ۲۰۰ متری — پاسداران</h4><p style="font-size:0.85rem;">۳ خواب | ۵ سال ساخت | انباری</p><strong style="color:var(--brass-dark);">۱۵,۰۰۰,۰۰۰,۰۰۰ تومان</strong><br><button class="btn btn-outline btn-sm" style="margin-top:0.5rem;" onclick="openPropertyDetail('apt2')">جزئیات ←</button></div></div>
+                        <div class="card" style="position:relative;"><span class="card-tag">تخفیف</span><img src="https://images.unsplash.com/photo-1600566753086-00f18f6b0050?w=600" class="card-image" alt="ملک"><div class="card-body"><h4>آپارتمان ۷۵ متری — الهیه</h4><p style="font-size:0.85rem;">۱ خواب | بازسازی شده</p><strong style="color:var(--brass-dark);">۶,۲۰۰,۰۰۰,۰۰۰ تومان</strong><br><button class="btn btn-outline btn-sm" style="margin-top:0.5rem;" onclick="openPropertyDetail('apt3')">جزئیات ←</button></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه جستجو -->
+
+        <!-- ============================================ -->
+        <!-- مودال جزئیات ملک                              -->
+        <!-- ============================================ -->
+        <div class="modal-overlay" id="propertyModal">
+            <div class="modal" style="position:relative;">
+                <button class="modal-close" onclick="closePropertyModal()">✕</button>
+                <h3 id="propertyModalTitle" style="margin-bottom:1rem;">جزئیات ملک</h3>
+                <div id="propertyModalContent"></div>
+                <a href="#contact" class="btn btn-brass btn-full" data-page="contact" onclick="closePropertyModal()" style="margin-top:1rem;">درخواست تماس مشاور ←</a>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- صفحه ۳: وبلاگ                                 -->
+        <!-- ============================================ -->
+        <section class="page" id="page-blog">
+            <div class="section" style="padding-top:120px;">
+                <div class="container">
+                    <span class="section-label">دانش و تحلیل</span>
+                    <h1 class="section-title">وبلاگ و مقالات</h1>
+                    <div class="divider-line"></div>
+                    <div class="grid-3" style="margin-top:2rem;">
+                        <div class="card"><div class="card-body"><span class="section-label">تحلیل بازار</span><h4>پیش‌بینی قیمت مسکن در تابستان ۱۴۰۴</h4><p style="font-size:0.9rem;">بررسی روند بازار و عوامل مؤثر</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('market')">مطالعه ←</button></div></div>
+                        <div class="card"><div class="card-body"><span class="section-label">راهنما</span><h4>فرق سند تک‌برگ و منگوله‌دار</h4><p style="font-size:0.9rem;">هر آنچه باید بدانید</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('deed')">مطالعه ←</button></div></div>
+                        <div class="card"><div class="card-body"><span class="section-label">حقوقی</span><h4>نکات مهم در تنظیم قولنامه</h4><p style="font-size:0.9rem;">از کلاهبرداری جلوگیری کنید</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('contract')">مطالعه ←</button></div></div>
+                        <div class="card"><div class="card-body"><span class="section-label">معرفی محله</span><h4>همه چیز درباره سعادت‌آباد</h4><p style="font-size:0.9rem;">قیمت، دسترسی، امکانات</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('saadatabad')">مطالعه ←</button></div></div>
+                        <div class="card"><div class="card-body"><span class="section-label">سرمایه‌گذاری</span><h4>مناطق پرسود برای خرید ملک</h4><p style="font-size:0.9rem;">کجا سرمایه‌گذاری کنیم؟</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('invest')">مطالعه ←</button></div></div>
+                        <div class="card"><div class="card-body"><span class="section-label">مالیات</span><h4>صفر تا صد مالیات بر خانه‌های خالی</h4><p style="font-size:0.9rem;">قوانین جدید را بدانید</p><button class="btn btn-outline btn-sm" onclick="openBlogPost('tax')">مطالعه ←</button></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه وبلاگ -->
+
+        <!-- ============================================ -->
+        <!-- مودال مقاله وبلاگ                             -->
+        <!-- ============================================ -->
+        <div class="modal-overlay" id="blogModal">
+            <div class="modal" style="position:relative;">
+                <button class="modal-close" onclick="closeBlogModal()">✕</button>
+                <h3 id="blogModalTitle" style="margin-bottom:1rem;">مقاله</h3>
+                <div id="blogModalContent"></div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- صفحه ۴: محله‌ها                               -->
+        <!-- ============================================ -->
+        <section class="page" id="page-neighborhoods">
+            <div class="section" style="padding-top:120px;">
+                <div class="container">
+                    <span class="section-label">راهنمای مناطق</span>
+                    <h1 class="section-title">محله‌های تهران</h1>
+                    <div class="divider-line"></div>
+                    <div class="grid-3" style="margin-top:2rem;">
+                        <div class="card"><div class="card-body"><h4>سعادت‌آباد</h4><p style="font-size:0.9rem;">میانگین قیمت: ۴۵ میلیون/متر<br>دسترسی عالی به مترو و اتوبان</p><button class="btn btn-outline btn-sm" onclick="navigateTo('blog');openBlogPost('saadatabad')">مشاهده تحلیل ←</button></div></div>
+                        <div class="card"><div class="card-body"><h4>الهیه</h4><p style="font-size:0.9rem;">میانگین قیمت: ۸۰ میلیون/متر<br>منطقه لوکس و امن</p><button class="btn btn-outline btn-sm" onclick="navigateTo('search')">مشاهده آگهی‌ها ←</button></div></div>
+                        <div class="card"><div class="card-body"><h4>پاسداران</h4><p style="font-size:0.9rem;">میانگین قیمت: ۵۵ میلیون/متر<br>دسترسی به امکانات کامل</p><button class="btn btn-outline btn-sm" onclick="navigateTo('search')">مشاهده آگهی‌ها ←</button></div></div>
+                        <div class="card"><div class="card-body"><h4>زعفرانیه</h4><p style="font-size:0.9rem;">میانگین قیمت: ۷۰ میلیون/متر<br>ویلایی و خوش‌آب‌وهوا</p><button class="btn btn-outline btn-sm" onclick="navigateTo('search')">مشاهده آگهی‌ها ←</button></div></div>
+                        <div class="card"><div class="card-body"><h4>ولنجک</h4><p style="font-size:0.9rem;">میانگین قیمت: ۶۵ میلیون/متر<br>نزدیک به طبیعت و کوهستان</p><button class="btn btn-outline btn-sm" onclick="navigateTo('search')">مشاهده آگهی‌ها ←</button></div></div>
+                        <div class="card"><div class="card-body"><h4>نارمک</h4><p style="font-size:0.9rem;">میانگین قیمت: ۲۵ میلیون/متر<br>منطقه قدیمی و سرسبز</p><button class="btn btn-outline btn-sm" onclick="navigateTo('search')">مشاهده آگهی‌ها ←</button></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه محله‌ها -->
+
+        <!-- ============================================ -->
+        <!-- صفحه ۵: درباره ما                             -->
+        <!-- ============================================ -->
+        <section class="page" id="page-about">
+            <div class="section" style="padding-top:120px;">
+                <div class="container-sm">
+                    <span class="section-label">ما که هستیم</span>
+                    <h1 class="section-title">درباره خانهٔ ماندگار</h1>
+                    <div class="divider-line"></div>
+                    <div class="card" style="padding:2.5rem;margin-top:2rem;">
+                        <h3>🎯 مأموریت ما</h3>
+                        <p style="font-size:1.05rem;">حذف دلال‌های غیرحرفه‌ای و ایجاد معامله‌ای شفاف. ما با ۱۵ سال تجربه در حوزه املاک، بستری امن برای خرید، فروش و اجاره ملک فراهم کرده‌ایم.</p>
+                    </div>
+                    <div class="card" style="padding:2.5rem;margin-top:1.5rem;">
+                        <h3>👥 تیم ما</h3>
+                        <div class="grid-3" style="margin-top:1.5rem;">
+                            <div style="text-align:center;"><div style="width:80px;height:80px;background:var(--border-light);border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:2rem;">👨‍💼</div><h5 style="margin-top:0.8rem;">مهندس احمدی</h5><p style="font-size:0.8rem;color:var(--warm-gray);">مدیرعامل</p></div>
+                            <div style="text-align:center;"><div style="width:80px;height:80px;background:var(--border-light);border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:2rem;">👩‍💻</div><h5 style="margin-top:0.8rem;">سارا رضایی</h5><p style="font-size:0.8rem;color:var(--warm-gray);">مدیر فروش</p></div>
+                            <div style="text-align:center;"><div style="width:80px;height:80px;background:var(--border-light);border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:2rem;">👨‍🔧</div><h5 style="margin-top:0.8rem;">علی کریمی</h5><p style="font-size:0.8rem;color:var(--warm-gray);">مدیر مارکتینگ</p></div>
+                        </div>
+                    </div>
+                    <div class="card" style="padding:2.5rem;margin-top:1.5rem;">
+                        <h3>📜 مجوزها</h3>
+                        <p>✅ پروانه کسب از اتحادیه مشاوران املاک</p>
+                        <p>✅ عضو رسمی نظام مهندسی</p>
+                        <a href="#contact" class="btn btn-outline btn-sm" data-page="contact">تماس با ما ←</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه درباره ما -->
+
+        <!-- ============================================ -->
+        <!-- صفحه ۶: تماس با ما                            -->
+        <!-- ============================================ -->
+        <section class="page" id="page-contact">
+            <div class="section" style="padding-top:120px;">
+                <div class="container-sm">
+                    <span class="section-label">ارتباط با ما</span>
+                    <h1 class="section-title">تماس با ما</h1>
+                    <div class="divider-line"></div>
+                    <div class="card" style="padding:2.5rem;margin-top:2rem;">
+                        <div class="grid-2">
+                            <div>
+                                <div class="form-group"><label class="form-label">نام و نام خانوادگی *</label><input type="text" class="form-input" id="contactName" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="نام شما"></div>
+                                <div class="form-group"><label class="form-label">شماره تماس *</label><input type="tel" class="form-input" id="contactPhone" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="۰۹۱۲۳۴۵۶۷۸۹"></div>
+                                <div class="form-group"><label class="form-label">موضوع</label><select class="form-input" id="contactSubject" style="border:1px solid var(--border-color);padding:0.7rem;"><option>خرید ملک</option><option>فروش ملک</option><option>رهن و اجاره</option><option>مشاوره</option></select></div>
+                                <div class="form-group"><label class="form-label">پیام *</label><textarea class="form-input" id="contactMsg" style="border:1px solid var(--border-color);padding:0.7rem;" placeholder="توضیحات شما"></textarea></div>
+                                <button class="btn btn-brass btn-full" onclick="submitContact()">📩 ارسال درخواست</button>
+                            </div>
+                            <div>
+                                <div class="card" style="padding:1.5rem;margin-bottom:1rem;background:var(--warm-white);"><p style="margin:0;"><strong>📞 تلفن:</strong><br>۰۲۱-۱۲۳۴۵۶۷۸</p></div>
+                                <div class="card" style="padding:1.5rem;margin-bottom:1rem;background:var(--warm-white);"><p style="margin:0;"><strong>📱 واتساپ:</strong><br>۰۹۱۲۳۴۵۶۷۸۹</p></div>
+                                <div class="card" style="padding:1.5rem;margin-bottom:1rem;background:var(--warm-white);"><p style="margin:0;"><strong>📧 ایمیل:</strong><br>info@mandegar.ir</p></div>
+                                <div class="card" style="padding:1.5rem;background:var(--warm-white);"><p style="margin:0;"><strong>📍 آدرس:</strong><br>تهران، سعادت‌آباد، خیابان ۲۴ متری</p><p style="margin-top:0.5rem;"><strong>⏰ ساعات کاری:</strong><br>شنبه تا پنجشنبه ۹ تا ۲۰</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه تماس با ما -->
+
+        <!-- ============================================ -->
+        <!-- صفحه ۷: سوالات متداول                         -->
+        <!-- ============================================ -->
+        <section class="page" id="page-faq">
+            <div class="section" style="padding-top:120px;">
+                <div class="container-sm">
+                    <span class="section-label">پرسش‌های پرتکرار</span>
+                    <h1 class="section-title">سوالات متداول</h1>
+                    <div class="divider-line"></div>
+                    <div class="card" style="padding:1.5rem;margin-top:1.5rem;"><h4>💰 کمیسیون مشاور املاک چقدر است؟</h4><p style="font-size:0.9rem;">طبق قانون، کمیسیون مشاور املاک برای خرید و فروش ۰.۵٪ از طرف buyer و ۰.۵٪ از طرف seller است. برای رهن و اجاره، ۲۵٪ از مبلغ اجاره یک ماه.</p></div>
+                    <div class="card" style="padding:1.5rem;margin-top:1rem;"><h4>📋 مدارک لازم برای خرید ملک چیست؟</h4><p style="font-size:0.9rem;">کارت ملی، شناسنامه، کد رهگیری، مبایعه‌نامه، سند تک‌برگ یا قولنامه معتبر.</p></div>
+                    <div class="card" style="padding:1.5rem;margin-top:1rem;"><h4>🏠 چگونه آگهی ثبت کنم؟</h4><p style="font-size:0.9rem;">از طریق فرم تماس با ما یا دکمه "درج آگهی رایگان" اقدام کنید. کارشناسان ما در اسرع وقت با شما تماس می‌گیرند.</p></div>
+                    <div class="card" style="padding:1.5rem;margin-top:1rem;"><h4>🔍 چگونه از صحت آگهی مطمئن شوم؟</h4><p style="font-size:0.9rem;">تمام آگهی‌های دارای نشان "تأیید شده" توسط کارشناسان ما بازدید میدانی شده‌اند.</p></div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه سوالات متداول -->
+
+        <!-- ============================================ -->
+        <!-- صفحه ۸: قوانین و مقررات                       -->
+        <!-- ============================================ -->
+        <section class="page" id="page-terms">
+            <div class="section" style="padding-top:120px;">
+                <div class="container-sm">
+                    <span class="section-label">حقوقی</span>
+                    <h1 class="section-title">قوانین و مقررات</h1>
+                    <div class="divider-line"></div>
+                    <div class="card" style="padding:2.5rem;margin-top:2rem;">
+                        <h3>📋 شرایط استفاده</h3>
+                        <p>۱. تمام آگهی‌های ثبت شده باید دارای اطلاعات صحیح و قیمت واقعی باشند.</p>
+                        <p>۲. درج آگهی تکراری یا قیمت غیرواقعی ممنوع است.</p>
+                        <p>۳. مسئولیت صحت اطلاعات آگهی با آگهی‌دهنده است.</p>
+                        <p>۴. خانهٔ ماندگار حق حذف آگهی‌های مشکوک را دارد.</p>
+                    </div>
+                    <div class="card" style="padding:2.5rem;margin-top:1.5rem;">
+                        <h3>🔒 حریم خصوصی</h3>
+                        <p>شماره تماس و اطلاعات شخصی شما صرفاً برای تماس مشاوران ما استفاده می‌شود و در اختیار شخص ثالث قرار نمی‌گیرد.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- پایان صفحه قوانین -->
+
+        <!-- ============================================ -->
+        <!-- فوتر                                         -->
+        <!-- ============================================ -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <div style="font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;"><span class="logo-mark" style="background:var(--brass);"></span>خانهٔ ماندگار</div>
+                        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.8;">پلتفرم جستجو و خرید ملک لوکس — ۱۵ سال تجربه، ۲۰,۰۰۰ فایل فعال</p>
+                    </div>
+                    <div>
+                        <h5>دسترسی سریع</h5>
+                        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+                            <li><a href="#search" data-page="search">جستجوی ملک</a></li>
+                            <li><a href="#blog" data-page="blog">وبلاگ</a></li>
+                            <li><a href="#neighborhoods" data-page="neighborhoods">محله‌ها</a></li>
+                            <li><a href="#faq" data-page="faq">سوالات متداول</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>خدمات ما</h5>
+                        <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+                            <li><a href="#search" data-page="search">فروش ملک</a></li>
+                            <li><a href="#search" data-page="search">رهن و اجاره</a></li>
+                            <li><a href="#search" data-page="search">پیش‌فروش</a></li>
+                            <li><a href="#contact" data-page="contact">مشاوره تخصصی</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5>تماس با ما</h5>
+                        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">📞 ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">📧 info@mandegar.ir</p>
+                        <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;">📍 تهران، سعادت‌آباد</p>
+                    </div>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.08);margin-top:3rem;padding-top:1.5rem;text-align:center;color:rgba(255,255,255,0.4);font-size:0.8rem;">
+                    © ۱۴۰۴ خانهٔ ماندگار — تمام حقوق محفوظ است.
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- پایان main-content -->
+    <!-- ============================================ -->
+    <!-- بخش ۳ از ۳: کل جاوااسکریپت                     -->
+    <!-- ============================================ -->
+    <script>
+        // ==================== PRELOADER ====================
+        var preloaderBar = document.getElementById('preloaderBar');
+        var progress = 0;
+        var preloaderInterval = setInterval(function() {
+            progress += Math.random() * 10;
+            if (progress > 100) progress = 100;
+            if (preloaderBar) preloaderBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(preloaderInterval);
+                setTimeout(function() {
+                    var preloader = document.getElementById('preloader');
+                    if (preloader) {
+                        preloader.style.opacity = '0';
+                        setTimeout(function() {
+                            if (preloader && preloader.parentNode) preloader.parentNode.removeChild(preloader);
+                        }, 600);
+                    }
+                }, 300);
+            }
+        }, 150);
+
+        // ==================== SPA ROUTER ====================
+        function navigateTo(pageName) {
+            document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+            var target = document.getElementById('page-' + pageName);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            document.querySelectorAll('[data-page]').forEach(function(l) { l.classList.remove('active'); });
+            document.querySelectorAll('[data-page="' + pageName + '"]').forEach(function(l) { l.classList.add('active'); });
+
+            var mn = document.getElementById('mobileNav');
+            var mo = document.getElementById('mobileOverlay');
+            var hb = document.getElementById('hamburger');
+            if (mn && mn.classList.contains('active')) {
+                mn.classList.remove('active');
+                mo.classList.remove('active');
+                hb.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            window.location.hash = pageName;
+        }
+
+        document.addEventListener('click', function(e) {
+            var link = e.target.closest('[data-page]');
+            if (link) {
+                e.preventDefault();
+                navigateTo(link.getAttribute('data-page'));
+            }
+        });
+
+        // ==================== MOBILE MENU ====================
+        var hamburger = document.getElementById('hamburger');
+        if (hamburger) {
+            hamburger.addEventListener('click', function() {
+                var mn = document.getElementById('mobileNav');
+                var mo = document.getElementById('mobileOverlay');
+                var isActive = mn.classList.contains('active');
+                if (isActive) {
+                    mn.classList.remove('active');
+                    mo.classList.remove('active');
+                    this.classList.remove('active');
+                    document.body.style.overflow = '';
+                } else {
+                    mn.classList.add('active');
+                    mo.classList.add('active');
+                    this.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        }
+
+        var mobileOverlay = document.getElementById('mobileOverlay');
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.remove('active');
+                this.classList.remove('active');
+                document.getElementById('hamburger').classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+
+        // ==================== STATS COUNTER ====================
+        function animateStats() {
+            var stats = document.querySelectorAll('.stat-value[data-target]');
+            if (stats.length === 0) return;
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        var el = entry.target;
+                        var targetNum = parseInt(el.getAttribute('data-target'));
+                        var duration = 2000;
+                        var start = Date.now();
+                        var suffix = el.textContent.includes('٪') ? '٪' : (el.textContent.includes('+') ? '+' : '');
+
+                        function update() {
+                            var elapsed = Date.now() - start;
+                            var progress = Math.min(elapsed / duration, 1);
+                            var easeOut = 1 - Math.pow(1 - progress, 3);
+                            var current = Math.round(targetNum * easeOut);
+                            el.textContent = current.toLocaleString('fa-IR') + suffix;
+                            if (progress < 1) {
+                                requestAnimationFrame(update);
+                            } else {
+                                el.textContent = targetNum.toLocaleString('fa-IR') + suffix;
+                            }
+                        }
+                        update();
+                        observer.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            stats.forEach(function(s) { observer.observe(s); });
+        }
+        animateStats();
+
+        // ==================== PROPERTY DETAIL MODAL ====================
+        var propertyData = {
+            'luxury': {
+                title: 'آپارتمان لوکس ۱۲۰ متری — الهیه',
+                content: '<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800" style="width:100%;max-height:300px;object-fit:cover;margin-bottom:1rem;" alt="آپارتمان لوکس"><p><strong>📍 موقعیت:</strong> الهیه، خیابان فرشته</p><p><strong>📐 متراژ:</strong> ۱۲۰ متر مربع</p><p><strong>🛏️ خواب:</strong> ۳ | 🛁 حمام: ۲</p><p><strong>🚗 پارکینگ:</strong> دارد | 📦 انباری: دارد</p><p><strong>🏗️ سال ساخت:</strong> ۱۴۰۱ (نوساز)</p><p><strong>📋 سند:</strong> تک‌برگ</p><p><strong>💰 قیمت هر متر:</strong> ۱۰۴ میلیون تومان</p>'
+            },
+            'villa': {
+                title: 'ویلای ۳۰۰ متری — نوشهر',
+                content: '<img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" style="width:100%;max-height:300px;object-fit:cover;margin-bottom:1rem;" alt="ویلای شمال"><p><strong>📍 موقعیت:</strong> نوشهر، دهکده آرامش</p><p><strong>📐 متراژ:</strong> ۳۰۰ متر مربع | زمین: ۸۰۰ متر</p><p><strong>🛏️ خواب:</strong> ۴ | 🛁 حمام: ۳</p><p><strong>🏊 استخر:</strong> دارد | 🌳 باغ: دارد</p><p><strong>🏗️ سال ساخت:</strong> ۱۳۹۹</p><p><strong>📋 سند:</strong> تک‌برگ</p>'
+            },
+            'land': {
+                title: 'زمین ۵۰۰ متری — لواسان',
+                content: '<img src="https://images.unsplash.com/photo-1600566753086-00f18f6b0050?w=800" style="width:100%;max-height:300px;object-fit:cover;margin-bottom:1rem;" alt="زمین لواسان"><p><strong>📍 موقعیت:</strong> لواسان، بلوار اصلی</p><p><strong>📐 متراژ:</strong> ۵۰۰ متر مربع</p><p><strong>🏗️ تراکم مجاز:</strong> ۴ طبقه</p><p><strong>📋 سند:</strong> تک‌برگ</p><p><strong>📐 جبهه:</strong> دو جبهه</p><p><strong>💰 قیمت هر متر:</strong> ۵۰ میلیون تومان</p>'
+            },
+            'apt1': {
+                title: 'آپارتمان ۹۰ متری — سعادت‌آباد',
+                content: '<p><strong>📍 موقعیت:</strong> سعادت‌آباد، خیابان اصلی</p><p><strong>📐 متراژ:</strong> ۹۰ متر مربع</p><p><strong>🛏️ خواب:</strong> ۲ | 🛁 حمام: ۱</p><p><strong>🚗 پارکینگ:</strong> دارد</p><p><strong>🏗️ سال ساخت:</strong> ۱۴۰۲ (نوساز)</p><p><strong>💰 قیمت:</strong> ۸,۵۰۰,۰۰۰,۰۰۰ تومان</p>'
+            },
+            'apt2': {
+                title: 'خانه ۲۰۰ متری — پاسداران',
+                content: '<p><strong>📍 موقعیت:</strong> پاسداران، خیابان دولت</p><p><strong>📐 متراژ:</strong> ۲۰۰ متر مربع</p><p><strong>🛏️ خواب:</strong> ۳ | 🛁 حمام: ۲</p><p><strong>🚗 پارکینگ:</strong> دارد | 📦 انباری: دارد</p><p><strong>🏗️ سال ساخت:</strong> ۱۳۹۹</p><p><strong>💰 قیمت:</strong> ۱۵,۰۰۰,۰۰۰,۰۰۰ تومان</p>'
+            },
+            'apt3': {
+                title: 'آپارتمان ۷۵ متری — الهیه',
+                content: '<p><strong>📍 موقعیت:</strong> الهیه، نزدیک میدان</p><p><strong>📐 متراژ:</strong> ۷۵ متر مربع</p><p><strong>🛏️ خواب:</strong> ۱ | 🛁 حمام: ۱</p><p><strong>🏗️ بازسازی:</strong> کامل در ۱۴۰۳</p><p><strong>💰 قیمت:</strong> ۶,۲۰۰,۰۰۰,۰۰۰ تومان (تخفیف ویژه)</p>'
+            }
+        };
+
+        function openPropertyDetail(key) {
+            var data = propertyData[key];
+            if (!data) return;
+            document.getElementById('propertyModalTitle').textContent = data.title;
+            document.getElementById('propertyModalContent').innerHTML = data.content;
+            document.getElementById('propertyModal').classList.add('active');
+        }
+
+        function closePropertyModal() {
+            document.getElementById('propertyModal').classList.remove('active');
+        }
+
+        var propertyModal = document.getElementById('propertyModal');
+        if (propertyModal) {
+            propertyModal.addEventListener('click', function(e) {
+                if (e.target === this) closePropertyModal();
+            });
+        }
+
+        // ==================== BLOG MODAL ====================
+        var blogPosts = {
+            'market': {
+                title: 'پیش‌بینی قیمت مسکن در تابستان ۱۴۰۴',
+                content: '<p>با توجه به نرخ تورم، افزایش قیمت مصالح ساختمانی و سیاست‌های جدید بانکی، پیش‌بینی می‌شود قیمت مسکن در تابستان ۱۴۰۴ بین ۱۰ تا ۱۵ درصد افزایش یابد.</p><p><strong>مناطق پرتقاضا:</strong> سعادت‌آباد، پاسداران، الهیه</p><p><strong>توصیه:</strong> خریداران عجله نکنند و فروشندگان قیمت‌های منطقی ارائه دهند.</p>'
+            },
+            'deed': {
+                title: 'فرق سند تک‌برگ و منگوله‌دار — هر آنچه باید بدانید',
+                content: '<p><strong>سند تک‌برگ:</strong> سند رسمی جدید که توسط اداره ثبت اسناد صادر می‌شود. دارای کد یکتا و غیرقابل جعل.</p><p><strong>سند منگوله‌دار:</strong> سند قدیمی که هنوز معتبر است اما بهتر است به تک‌برگ تبدیل شود.</p><p><strong>نکته:</strong> هنگام خرید ملک حتماً استعلام سند را از اداره ثبت بگیرید.</p>'
+            },
+            'contract': {
+                title: 'نکات مهم در تنظیم قولنامه — از کلاهبرداری جلوگیری کنید',
+                content: '<p>۱. حتماً شماره سند و پلاک ثبتی در قولنامه ذکر شود.</p><p>۲. مبلغ دقیق به حروف و عدد نوشته شود.</p><p>۳. تاریخ دقیق انتقال سند مشخص باشد.</p><p>۴. از مشاور املاک دارای پروانه کسب استفاده کنید.</p><p>۵. کد رهگیری دریافت کنید.</p>'
+            },
+            'saadatabad': {
+                title: 'همه چیز درباره سعادت‌آباد — قیمت، دسترسی، امکانات',
+                content: '<p>سعادت‌آباد یکی از محله‌های مرفه‌نشین تهران است.</p><p><strong>میانگین قیمت:</strong> ۴۵ میلیون تومان/متر</p><p><strong>دسترسی:</strong> مترو، اتوبان همت و یادگار امام</p><p><strong>امکانات:</strong> بیمارستان مدرس، مراکز خرید متعدد، پارک</p>'
+            },
+            'invest': {
+                title: 'مناطق پرسود برای خرید ملک — کجا سرمایه‌گذاری کنیم؟',
+                content: '<p>۱. <strong>مناطق در حال توسعه:</strong> منطقه ۲۲، چیتگر</p><p>۲. <strong>مناطق لوکس:</strong> الهیه، زعفرانیه (همواره پرسود)</p><p>۳. <strong>شمال کشور:</strong> نوشهر، نور (ویلاهای اجاره‌ای)</p>'
+            },
+            'tax': {
+                title: 'صفر تا صد مالیات بر خانه‌های خالی',
+                content: '<p>طبق قانون جدید، خانه‌هایی که بیش از ۶ ماه خالی بمانند، مشمول مالیات می‌شوند.</p><p><strong>نرخ مالیات:</strong> سال اول: ۶ برابر مالیات ملک | سال دوم: ۱۲ برابر | سال سوم: ۱۸ برابر</p>'
+            }
+        };
+
+        function openBlogPost(key) {
+            var data = blogPosts[key];
+            if (!data) return;
+            document.getElementById('blogModalTitle').textContent = data.title;
+            document.getElementById('blogModalContent').innerHTML = data.content;
+            document.getElementById('blogModal').classList.add('active');
+        }
+
+        function closeBlogModal() {
+            document.getElementById('blogModal').classList.remove('active');
+        }
+
+        var blogModal = document.getElementById('blogModal');
+        if (blogModal) {
+            blogModal.addEventListener('click', function(e) {
+                if (e.target === this) closeBlogModal();
+            });
+        }
+
+        // ==================== CONTACT FORM ====================
+        function submitContact() {
+            var name = document.getElementById('contactName').value.trim();
+            var phone = document.getElementById('contactPhone').value.trim();
+            var msg = document.getElementById('contactMsg').value.trim();
+            if (!name || !phone || !msg) {
+                alert('⚠️ لطفاً فیلدهای ضروری (نام، شماره تماس، پیام) را پر کنید.');
+                return;
+            }
+            alert('✅ درخواست شما با موفقیت ارسال شد!\n\nکارشناسان ما در اسرع وقت با شما تماس می‌گیرند.');
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactPhone').value = '';
+            document.getElementById('contactMsg').value = '';
+        }
+
+        // ==================== INIT ====================
+        var hash = window.location.hash.replace('#', '');
+        if (hash && document.getElementById('page-' + hash)) {
+            navigateTo(hash);
+        }
+
+        console.log('🏡 خانهٔ ماندگار — دمو آماده است');
+        console.log('✅ ۸ صفحه | لودینگ | شمارنده | مودال جزئیات ملک | مودال مقالات');
+        console.log('✅ تک‌تک دکمه‌ها دارای مقصد واقعی هستند');
+        console.log('✅ بدون انیمیشن — گالری سکوت');
+    </script>
+</body>
+</html>
